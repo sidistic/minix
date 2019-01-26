@@ -248,6 +248,7 @@ void switch_to_user(void)
 	 */
 	if (proc_is_runnable(p))
 		goto check_misc_flags;
+
 	/*
 	 * if a process becomes not runnable while handling the misc flags, we
 	 * need to pick a new one here and start from scratch. Also if the
@@ -370,6 +371,7 @@ check_misc_flags:
 #endif
 
 	p = arch_finish_switch_to_user();
+	printf(“PID %d swapped in”,(25+proc->p_pnr));
 	assert(p->p_cpu_time_left);
 
 	context_stop(proc_addr(KERNEL));
