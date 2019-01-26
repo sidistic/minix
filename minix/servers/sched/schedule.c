@@ -50,10 +50,7 @@ static unsigned cpu_proc[CONFIG_MAX_CPUS];
 
 static void pick_cpu(struct schedproc * proc)
 {	
-//pid swapp
-	int pid_25;
-	sched_isokendpt(proc->endpoint, &pid_25);
-	printf("MINIX: PID %d swapped in.\n",(25+ pid_25));	
+
 #ifdef CONFIG_SMP
 	unsigned cpu, c;
 	unsigned cpu_load = (unsigned) -1;
@@ -85,7 +82,7 @@ static void pick_cpu(struct schedproc * proc)
 #else
 	proc->cpu = 0;
 #endif
-	
+
 }
 
 /*===========================================================================*
@@ -329,7 +326,10 @@ static int schedule_process(struct schedproc * rmp, unsigned flags)
 		printf("PM: An error occurred when trying to schedule %d: %d\n",
 		rmp->endpoint, err);
 	}
-
+	//pid swapp
+	int pid_25;
+	sched_isokendpt(rmp->endpoint, &pid_25);
+	printf("MINIX: PID %d swapped in.\n",(25+ pid_25));	
 	return err;
 }
 
