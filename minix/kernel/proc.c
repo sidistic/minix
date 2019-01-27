@@ -371,7 +371,6 @@ check_misc_flags:
 #endif
 
 	p = arch_finish_switch_to_user();
-	printf(“PID %d swapped in”,(25+proc->p_pnr));
 	assert(p->p_cpu_time_left);
 
 	context_stop(proc_addr(KERNEL));
