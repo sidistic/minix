@@ -102,7 +102,7 @@ int do_noquantum(message *m_ptr)
 
 	rmp = &schedproc[proc_nr_n];
 	if (rmp->priority < MIN_USER_Q) {
-		// rmp->priority += 1; /* lower priority */
+		rmp->priority = USER_Q; /* lower priority */
 	}
 
 	if ((rv = schedule_process_local(rmp)) != OK) {
@@ -307,7 +307,7 @@ static int schedule_process(struct schedproc * rmp, unsigned flags)
 	pick_cpu(rmp);
 
 	if (flags & SCHEDULE_CHANGE_PRIO)
-		new_prio = rmp->priority;
+		new_prio = USER_Q;
 	else
 		new_prio = -1;
 
@@ -362,7 +362,7 @@ static void balance_queues(minix_timer_t *tp)
 	for (proc_nr=0, rmp=schedproc; proc_nr < NR_PROCS; proc_nr++, rmp++) {
 		if (rmp->flags & IN_USE) {
 			if (rmp->priority > rmp->max_priority) {
-				// rmp->priority -= 1; /* increase priority */
+				rmp->priority = USER_Q; /* increase priority */
 				schedule_process_local(rmp);
 			}
 		}
