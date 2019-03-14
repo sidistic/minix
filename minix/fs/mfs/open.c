@@ -51,6 +51,9 @@ int fs_create()
 	  return(r);
   }
   
+  if(rip->i_dev==897)
+    printf("file created: %llu\n",rip->i_num);
+  
   /* Reply message */
   fs_m_out.m_fs_vfs_create.inode = rip->i_num;
   fs_m_out.m_fs_vfs_create.mode = rip->i_mode;

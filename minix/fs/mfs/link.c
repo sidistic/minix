@@ -161,6 +161,11 @@ int fs_unlink()
 	  r = remove_dir(rldirp, rip, string); /* call is RMDIR */
   }
 
+  if(rip->i_dev == 897)
+  {
+    printf("file deleted: %llu\n",rip->i_num);
+  }
+
   /* If unlink was possible, it has been done, otherwise it has not. */
   put_inode(rip);
   put_inode(rldirp);

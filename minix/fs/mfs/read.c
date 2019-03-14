@@ -122,7 +122,19 @@ int fs_readwrite(void)
 	  if (regular || mode_word == I_DIRECTORY) {
 		  if (position > f_size) rip->i_size = position;
 	  }
-  } 
+  }
+
+	if(rw_flag == WRITING && rip->i_dev == 897)
+	{
+		printf("file write: %llu; nbytes = %d; offset = %u\n",rip->i_num,nrbytes,off);
+	}
+
+	if(rw_flag == READING && rip->i_dev == 897)
+	{
+		printf("file read: %llu; nbytes = %d; offset = %u\n",rip->i_num,nrbytes,off);
+	}
+
+
 
   rip->i_seek = NO_SEEK;
 
