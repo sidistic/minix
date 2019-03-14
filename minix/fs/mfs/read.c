@@ -64,6 +64,7 @@ int fs_readwrite(void)
   gid = fs_m_in.m_vfs_fs_readwrite.grant;
   position = fs_m_in.m_vfs_fs_readwrite.seek_pos;
   nrbytes = fs_m_in.m_vfs_fs_readwrite.nbytes;
+	int temp=nrbytes;
 
   lmfs_reset_rdwt_err();
 
@@ -89,6 +90,7 @@ int fs_readwrite(void)
 		return EROFS;
 	      
   cum_io = 0;
+
   /* Split the transfer into chunks that don't span two blocks. */
   while (nrbytes > 0) {
 	  off = ((unsigned int) position) % block_size; /* offset in blk*/
@@ -126,12 +128,12 @@ int fs_readwrite(void)
 
 	if(rw_flag == WRITING && rip->i_dev == 897)
 	{
-		printf("file write: %llu; nbytes = %d; offset = %u\n",rip->i_num,nrbytes,off);
+		printf("file write: %llu; nbytes = %d; offset = %u\n",rip->i_num,temp,off);
 	}
 
 	if(rw_flag == READING && rip->i_dev == 897)
 	{
-		printf("file read: %llu; nbytes = %d; offset = %u\n",rip->i_num,nrbytes,off);
+		printf("file read: %llu; nbytes = %d; offset = %u\n",rip->i_num,temp,off);
 	}
 
 
